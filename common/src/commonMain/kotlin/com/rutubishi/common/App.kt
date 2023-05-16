@@ -1,25 +1,33 @@
 package com.rutubishi.common
 
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import com.rutubishi.common.ui.color.TableTopTheme
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.rutubishi.common.ui.presentation.screens.OnboardingScreen
+import com.rutubishi.common.ui.theme.TableTopTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
-    val platformName = getPlatformName()
 
     TableTopTheme {
-        Button(onClick = {
-            text = "Hello, $platformName"
-        }) {
-            Text(text)
+
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize()
+        ){
+            OnboardingScreen(
+                modifier = Modifier
+                    .fillMaxSize(),
+                screenPadding = PaddingValues(top = 16.dp, start = 8.dp, end = 8.dp, bottom = 32.dp)
+            )
         }
+
+
     }
 
 }
