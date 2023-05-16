@@ -1,3 +1,4 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.compose
 
 plugins {
@@ -15,11 +16,12 @@ kotlin {
         jvmToolchain(11)
     }
     sourceSets {
+        @OptIn(ExperimentalComposeLibrary::class)
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                api(compose.material)
+                api(compose.material3)
             }
         }
         val commonTest by getting {
