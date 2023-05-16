@@ -21,7 +21,12 @@ kotlin {
                 implementation(compose.desktop.currentOs)
             }
         }
-        val jvmTest by getting
+        val jvmTest by getting {
+            dependencies {
+                implementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+            }
+
+        }
     }
 }
 

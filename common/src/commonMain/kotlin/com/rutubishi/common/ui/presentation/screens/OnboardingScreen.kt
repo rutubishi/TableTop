@@ -1,6 +1,5 @@
 package com.rutubishi.common.ui.presentation.screens
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,13 +33,12 @@ import com.rutubishi.common.ui.wrappers.getOnboardingImage
 fun OnboardingScreen(
     modifier: Modifier = Modifier,
     screenPadding: PaddingValues = PaddingValues(0.dp),
-
     ) {
 
     Image(
         modifier = Modifier
             .fillMaxWidth()
-            .height(350.dp),
+            .height(450.dp),
         painter = getOnboardingImage(),
         contentScale = ContentScale.Crop,
         alignment = Alignment.Center,
