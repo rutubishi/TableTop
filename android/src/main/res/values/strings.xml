@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    app onboarding screens-->
+    <string name="welcome_message_p1">Needless to worry, </string>
+    <string name="welcome_message_p2">Catch that dinner exactly how you want it with </string>
+    <string name="app_name">TableTop</string>
+</resources>
