@@ -8,12 +8,17 @@ group = "com.rutubishi"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     implementation(project(":common"))
     implementation("androidx.activity:activity-compose:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.4.2")
+
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.4.2")
 }
 
 android {
@@ -24,6 +29,7 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0-SNAPSHOT"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
