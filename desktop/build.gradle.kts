@@ -17,13 +17,13 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
-                implementation(project(":common"))
+                implementation(project(libs.versions.shared.get()))
                 implementation(compose.desktop.currentOs)
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+                implementation(libs.test.compose)
             }
 
         }
