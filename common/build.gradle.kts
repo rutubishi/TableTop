@@ -42,7 +42,6 @@ kotlin {
         val androidAndroidTest by getting {
             dependencies {
                 implementation("junit:junit:4.13.2")
-                implementation(project(":android"))
                 implementation(compose.uiTestJUnit4)
             }
         }
