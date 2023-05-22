@@ -1,0 +1,48 @@
+[versions]
+# main
+activity-compose = "1.5.0"
+appcompat = "1.5.1"
+core-ktx = "1.9.0"
+ui-tooling-preview = "1.4.2"
+
+# test
+test-compose = "1.4.3"
+
+# debug
+ui-test-manifest = "1.4.3"
+ui-tooling = "1.4.2"
+
+# android app config
+minSdk = "24"
+targetSdk = "33"
+versionCode = "1"
+versionName = "1.0-SNAPSHOT"
+testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+# project libs
+shared = ":common"
+android = ":android"
+desktop = ":desktop"
+
+[libraries]
+# dev
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui-tooling-preview" }
+
+# test
+test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "test-compose" }
+junit4 = { module = "junit:junit", version = "4.13.2" }
+
+# debug
+ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "ui-test-manifest" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "ui-tooling" }
+
+[bundles]
+dev = [ "activity-compose", "ui-tooling-preview" ]
+test = [ "test-compose" ]
+debug = [ "ui-test-manifest", "ui-tooling" ]
+
+[plugins]
+

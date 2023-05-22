@@ -13,23 +13,21 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation("androidx.activity:activity-compose:1.5.0")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.2")
+    implementation(libs.bundles.dev)
 
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.4.2")
+    androidTestImplementation(libs.bundles.test)
+    debugImplementation(libs.bundles.debug)
 }
 
 android {
     compileSdk = 33
     defaultConfig {
         applicationId = "com.rutubishi.android"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0-SNAPSHOT"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
+        testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
