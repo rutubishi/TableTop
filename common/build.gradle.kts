@@ -23,6 +23,8 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
+                implementation(libs.kamel.image)
+                implementation("io.ktor:ktor-client-okhttp:2.3.0")
             }
         }
 
