@@ -3,6 +3,7 @@ package com.rutubishi.android.ui.presentation.screens
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,8 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rutubishi.android.R
+import com.rutubishi.common.ui.presentation.components.ListSectionTitle
 import com.rutubishi.common.ui.presentation.components.SearchBar
 import com.rutubishi.common.ui.presentation.components.TrendingFood
+import com.rutubishi.common.ui.presentation.components.TrendingFoodList
+import com.rutubishi.common.ui.util.TrendingCategory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,6 +50,39 @@ fun HomeScreen(
             hint = "Search for food",
             onValueChange = { searchQuery = it },
             text = searchQuery
+        )
+
+        ListSectionTitle(
+            title = "Trending",
+            icon = painterResource(id = R.drawable.ic_arrow_right),
+        )
+
+        TrendingFoodList(
+            modifier = Modifier
+                .padding(8.dp),
+            trendingCategories = listOf(
+                TrendingCategory(
+                    title = "Burger",
+                    icon = painterResource(id = R.drawable.app_banner)),
+
+                TrendingCategory(
+                    title = "Burger",
+                    icon = painterResource(id = R.drawable.app_banner)),
+
+                TrendingCategory(
+                    title = "Burger",
+                    icon = painterResource(id = R.drawable.app_banner)),
+
+                TrendingCategory(
+                    title = "Burger",
+                    icon = painterResource(id = R.drawable.app_banner)),
+
+                TrendingCategory(
+                    title = "Burger",
+                    icon = painterResource(id = R.drawable.app_banner)),
+
+
+                )
         )
 
         TrendingFood(
