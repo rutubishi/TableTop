@@ -1,6 +1,7 @@
 [versions]
 # main
 activity-compose = "1.5.0"
+constraintlayout-compose = "1.0.1"
 appcompat = "1.5.1"
 core-ktx = "1.9.0"
 ui-tooling-preview = "1.4.2"
@@ -35,6 +36,7 @@ material = "1.9.0"
 [libraries]
 # dev
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui-tooling-preview" }

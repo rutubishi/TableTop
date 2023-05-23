@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rutubishi.android.R
+import com.rutubishi.common.ui.presentation.components.AdBanner
 import com.rutubishi.common.ui.presentation.components.ListSectionTitle
 import com.rutubishi.common.ui.presentation.components.PopularRestaurant
 import com.rutubishi.common.ui.presentation.components.PopularRestaurantList
@@ -40,6 +41,11 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .padding(paddingValues)) {
+
+        AdBanner(
+            message = "Get 50% off on your first order",
+            bannerImage = painterResource(id = R.drawable.app_banner),
+        )
 
         SearchBar(
             modifier = Modifier
