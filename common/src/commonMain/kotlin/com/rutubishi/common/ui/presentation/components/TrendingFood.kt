@@ -1,6 +1,7 @@
 package com.rutubishi.common.ui.presentation.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -8,7 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -49,18 +53,20 @@ fun TrendingFood(
                     .size(75.dp)
                     .padding(top = 8.dp),
                 contentDescription = contentDescription,
-                contentScale = ContentScale.Inside,
+                contentScale = ContentScale.Crop,
             )
 
             Spacer(modifier = Modifier
-                .padding(8.dp))
+                .padding(2.dp))
 
             Text(
+                modifier = Modifier
+                    .padding(bottom = 4.dp),
                 text = title,
                 style = MaterialTheme.typography.bodyMedium,
                 fontStyle = FontStyle.Normal,
-                textAlign = TextAlign.Center
-            )
+                textAlign = TextAlign.Center,
+                )
 
         }
 
@@ -78,11 +84,12 @@ fun TrendingFoodList(
     LazyRow(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        contentPadding = PaddingValues(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
 
         items (trendingCategories) { category ->
             TrendingFood(
+                modifier = Modifier,
                 painter = category.icon,
                 contentDescription = category.title,
                 title = category.title,

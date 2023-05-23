@@ -19,9 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rutubishi.android.R
 import com.rutubishi.common.ui.presentation.components.ListSectionTitle
+import com.rutubishi.common.ui.presentation.components.PopularRestaurant
+import com.rutubishi.common.ui.presentation.components.PopularRestaurantList
 import com.rutubishi.common.ui.presentation.components.SearchBar
 import com.rutubishi.common.ui.presentation.components.TrendingFood
 import com.rutubishi.common.ui.presentation.components.TrendingFoodList
+import com.rutubishi.common.ui.util.Restaurant
 import com.rutubishi.common.ui.util.TrendingCategory
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,40 +62,49 @@ fun HomeScreen(
 
         TrendingFoodList(
             modifier = Modifier
-                .padding(8.dp),
+                .padding(top = 8.dp),
             trendingCategories = listOf(
                 TrendingCategory(
                     title = "Burger",
-                    icon = painterResource(id = R.drawable.app_banner)),
+                    icon = painterResource(id = R.drawable.ic_burger)),
 
                 TrendingCategory(
                     title = "Burger",
-                    icon = painterResource(id = R.drawable.app_banner)),
+                    icon = painterResource(id = R.drawable.ic_burger)),
 
                 TrendingCategory(
                     title = "Burger",
-                    icon = painterResource(id = R.drawable.app_banner)),
+                    icon = painterResource(id = R.drawable.ic_burger)),
 
                 TrendingCategory(
                     title = "Burger",
-                    icon = painterResource(id = R.drawable.app_banner)),
+                    icon = painterResource(id = R.drawable.ic_burger)),
 
                 TrendingCategory(
                     title = "Burger",
-                    icon = painterResource(id = R.drawable.app_banner)),
+                    icon = painterResource(id = R.drawable.ic_burger)),
 
 
                 )
         )
 
-        TrendingFood(
-            modifier = Modifier
-                .padding(8.dp),
-            onClick = { Log.d("CLICKED", "FOOD") },
-            painter = painterResource(id = R.drawable.app_banner),
-            contentDescription = "",
-            title = "Burger"
+        ListSectionTitle(
+            title = "Popular Near You",
+            icon = painterResource(id = R.drawable.ic_arrow_right),
         )
+
+        PopularRestaurantList(
+            modifier = Modifier
+                .padding(top = 8.dp),
+            restaurants = (1..10).map {
+                Restaurant(
+                    banner = painterResource(id = R.drawable.app_banner),
+                    name = "Burger King",
+                )
+            }
+        )
+
+
     }
 
 }
