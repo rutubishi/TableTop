@@ -1,4 +1,4 @@
-import org.jetbrains.compose.compose
+import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
     kotlin("multiplatform")
@@ -14,28 +14,34 @@ kotlin {
     jvm("desktop") {
         jvmToolchain(11)
     }
+
+    @OptIn(ExperimentalComposeLibrary::class)
     sourceSets {
+
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                api(compose.material)
+                api(compose.material3)
             }
         }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(compose.uiTestJUnit4)
             }
         }
         val androidMain by getting {
             dependencies {
-                api("androidx.appcompat:appcompat:1.5.1")
-                api("androidx.core:core-ktx:1.9.0")
+                api(libs.appcompat)
+                api(libs.core.ktx)
             }
         }
-        val androidTest by getting {
+        val androidAndroidTest by getting {
             dependencies {
-                implementation("junit:junit:4.13.2")
+                implementation(libs.junit4)
+                implementation(compose.uiTestJUnit4)
             }
         }
         val desktopMain by getting {
@@ -43,16 +49,21 @@ kotlin {
                 api(compose.preview)
             }
         }
-        val desktopTest by getting
+
+        val desktopTest by getting {
+            dependencies {
+                implementation(compose.uiTestJUnit4)
+            }
+        }
     }
 }
 
 android {
-    compileSdkVersion(33)
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(33)
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
