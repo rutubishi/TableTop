@@ -20,6 +20,7 @@ import com.rutubishi.common.ui.presentation.components.AdBanner
 import com.rutubishi.common.ui.presentation.components.ListSectionTitle
 import com.rutubishi.common.ui.presentation.components.PopularRestaurantList
 import com.rutubishi.common.ui.presentation.components.SearchBar
+import com.rutubishi.common.ui.presentation.components.SearchOptionsList
 import com.rutubishi.common.ui.presentation.components.TrendingFoodList
 import com.rutubishi.common.ui.util.Restaurant
 import com.rutubishi.common.ui.util.TrendingCategory
@@ -46,7 +47,7 @@ fun HomeScreen(
         SearchBar(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(4.dp)
+                .padding(vertical = 4.dp)
                 .height(TextFieldDefaults.MinHeight),
             leadingIcon = painterResource(id = R.drawable.ic_search),
             trailingIcon = painterResource(id = R.drawable.ic_filter),
@@ -55,6 +56,13 @@ fun HomeScreen(
             hint = "Search for food",
             onValueChange = { searchQuery = it },
             text = searchQuery
+        )
+
+        SearchOptionsList(
+            modifier = Modifier
+                .padding(vertical = 8.dp),
+            options = listOf("Fast Food", "Burger", "Pizza", "Asian", "Dessert"),
+            onOptionSelected = { searchQuery = it }
         )
 
         ListSectionTitle(

@@ -147,7 +147,6 @@ fun RestaurantSlots(
         Text(
             modifier = modifier,
             text = "NO EMPTY SLOTS",
-            fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.bodyMedium,
         )
     else
@@ -157,7 +156,7 @@ fun RestaurantSlots(
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Normal,
-                        color = MaterialTheme.colorScheme.tertiary
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 ) {
                     append("$emptySlots")
