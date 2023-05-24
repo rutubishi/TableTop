@@ -10,18 +10,18 @@ version = "1.0-SNAPSHOT"
 
 
 kotlin {
-    jvm {
+    jvm("desktop") {
         jvmToolchain(11)
         withJava()
     }
     sourceSets {
-        val jvmMain by getting {
+        val desktopMain by getting {
             dependencies {
                 implementation(project(libs.versions.shared.get()))
                 implementation(compose.desktop.currentOs)
             }
         }
-        val jvmTest by getting {
+        val desktopTest by getting {
             dependencies {
                 implementation(libs.test.compose)
             }

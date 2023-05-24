@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
+    id("io.ktor.plugin") version "2.3.0"
 }
 
 group = "com.rutubishi"
@@ -11,6 +12,9 @@ version = "1.0-SNAPSHOT"
 
 kotlin {
     android()
+    jvm("server"){
+        jvmToolchain(17)
+    }
     jvm("desktop") {
         jvmToolchain(11)
     }
@@ -57,6 +61,11 @@ kotlin {
                 implementation(compose.uiTestJUnit4)
             }
         }
+
+        val serverMain by getting
+
+        val serverTest by getting
+
     }
 }
 
@@ -72,3 +81,4 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+
