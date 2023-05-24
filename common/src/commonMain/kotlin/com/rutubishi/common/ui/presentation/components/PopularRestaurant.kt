@@ -96,7 +96,7 @@ fun PopularRestaurant(
                     // empty slots
                     RestaurantSlots(
                         modifier = Modifier
-                            .padding(bottom = 8.dp),
+                            .padding(bottom = 4.dp),
                         emptySlots = emptySlots
                     )
 
@@ -197,7 +197,7 @@ fun PopularRestaurantList(
 }
 
 
-fun parseReviews(reviews: Int): String {
+private fun parseReviews(reviews: Int): String {
     val reviewData = if(reviews < 100) "$reviews" else "100+"
     return "($reviewData reviews)"
 }
