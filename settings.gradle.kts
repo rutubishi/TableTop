@@ -20,3 +20,4 @@ rootProject.name = "TableTop"
 
 include(":android", ":desktop", ":common")
 include(":androidMain")
+include(":client-data")
