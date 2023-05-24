@@ -1,9 +1,12 @@
 [versions]
 # main
 activity-compose = "1.5.0"
+constraintlayout-compose = "1.0.1"
 appcompat = "1.5.1"
 core-ktx = "1.9.0"
 ui-tooling-preview = "1.4.2"
+coil-compose= "2.4.0"
+kamel-image = "0.4.0"
 
 # test
 test-compose = "1.4.3"
@@ -23,13 +26,22 @@ testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 shared = ":common"
 android = ":android"
 desktop = ":desktop"
+org-jetbrains-kotlin-jvm = "1.8.0"
+agp = "7.3.0"
+org-jetbrains-kotlin-android = "1.8.0"
+junit = "1.1.5"
+espresso-core = "3.5.1"
+material = "1.9.0"
 
 [libraries]
 # dev
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui-tooling-preview" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
+kamel-image = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kamel-image" }
 
 # test
 test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "test-compose" }
@@ -38,6 +50,9 @@ junit4 = { module = "junit:junit", version = "4.13.2" }
 # debug
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "ui-test-manifest" }
 ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "ui-tooling" }
+junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [bundles]
 dev = [ "activity-compose", "ui-tooling-preview" ]
@@ -45,4 +60,7 @@ test = [ "test-compose" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
 
 [plugins]
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 
