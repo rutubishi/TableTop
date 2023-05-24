@@ -62,6 +62,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 
 ## SERVER
 kgraphql = { module = "com.apurebase:kgraphql", version.ref = "kgraphql" }
+kgraphql-ktor = { module = "com.apurebase:kgraphql-ktor", version.ref = "kgraphql" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-test = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor" }
@@ -72,7 +73,7 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 dev = [ "activity-compose", "ui-tooling-preview" ]
 test = [ "test-compose" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
-server-main = [ "kgraphql", "ktor-server-netty", "ktor-server-core", "logback" ]
+server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-core", "logback" ]
 server-test = [ "ktor-server-test", "kotlin-test-junit" ]
 
 [plugins]
