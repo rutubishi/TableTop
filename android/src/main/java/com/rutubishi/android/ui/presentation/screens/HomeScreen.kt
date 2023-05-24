@@ -1,9 +1,7 @@
 package com.rutubishi.android.ui.presentation.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,10 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.rutubishi.android.R
 import com.rutubishi.common.ui.presentation.components.AdBanner
 import com.rutubishi.common.ui.presentation.components.ListSectionTitle
-import com.rutubishi.common.ui.presentation.components.PopularRestaurant
 import com.rutubishi.common.ui.presentation.components.PopularRestaurantList
 import com.rutubishi.common.ui.presentation.components.SearchBar
-import com.rutubishi.common.ui.presentation.components.TrendingFood
 import com.rutubishi.common.ui.presentation.components.TrendingFoodList
 import com.rutubishi.common.ui.util.Restaurant
 import com.rutubishi.common.ui.util.TrendingCategory
@@ -43,7 +39,7 @@ fun HomeScreen(
             .padding(paddingValues)) {
 
         AdBanner(
-            message = "Get 50% off on your first order",
+            message = "Get 30% off your first order",
             bannerImage = painterResource(id = R.drawable.app_banner),
         )
 
