@@ -22,21 +22,8 @@ fun Application.configureGraphQL() {
 }
 
 fun sendSampleData(): String{
-    transaction {
-        repeat(5){
-            User.new {
-                this.active = true
-                this.email = "asdas"
-                this.passwordHash = "adasdasd"
-                this.phone = "sdasdas"
-                this.name = "Adasdasdas"
-            }
-        }
-        commit()
-    }
     val users = transaction {
         User.all().toList()
     }
-
-    return users.joinToString(",")
+    return "users.joinToString()"
 }

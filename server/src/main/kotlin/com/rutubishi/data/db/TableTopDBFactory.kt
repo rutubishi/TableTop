@@ -12,7 +12,7 @@ object TableTopDBFactory {
 
         val dataSource: HikariDataSource = HikariDataSource().apply {
             driverClassName = "org.postgresql.Driver"
-            jdbcUrl = "jdbc:postgresql://db:5432/tableTop?user=postgres"
+            jdbcUrl = "jdbc:postgresql://localhost:5432/tableTop?user=postgres&password=postgres"
             maximumPoolSize = 5
             isAutoCommit = true
             transactionIsolation = "TRANSACTION_REPEATABLE_READ"

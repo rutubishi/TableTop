@@ -23,6 +23,7 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
+                implementation(libs.koin.core)
             }
         }
 

@@ -7,6 +7,7 @@ core-ktx = "1.9.0"
 ui-tooling-preview = "1.4.2"
 coil-compose= "2.4.0"
 kamel-image = "0.4.0"
+koin = "3.4.0"
 
 # test
 test-compose = "1.4.3"
@@ -53,6 +54,9 @@ core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui-tooling-preview" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 kamel-image = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kamel-image" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 
 # test
 test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "test-compose" }
@@ -90,7 +94,7 @@ test = [ "test-compose" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
 server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-core", "logback",
     "ktor-server-content-negotiation", "ktor-server-auth", "ktor-server-auth-jwt", "postgres", "h2",
-    "exposed-core", "exposed-jdbc", "exposed-dao", "eh-cache", "hikaricp"]
+    "exposed-core", "exposed-jdbc", "exposed-dao", "eh-cache", "hikaricp", "koin-ktor"]
 server-test = [ "ktor-server-test", "kotlin-test-junit" ]
 
 [plugins]
