@@ -3,7 +3,9 @@ package com.rutubishi.services
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.rutubishi.data.db.User
+import com.rutubishi.data.db.Users
 import com.rutubishi.data.repository.AuthRepository
+import com.toxicbakery.bcrypt.Bcrypt
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -28,11 +30,32 @@ class AuthService(
                 this.email = email
                 this.name = fullName
                 this.phone = phone
-                this.passwordHash = password
+                this.passwordHash = hashPass(password)
             }
         }
     }
 
+    @Throws(Exception::class)
+    fun loginAccount(
+        email: String,
+        password: String,
+    ): Boolean {
+        var user: User? = null
+        transaction {
+            user = User
+                .find { Users.email eq email }
+                .limit(n = 1)
+                .firstOrNull()
+        }
+        return if(user == null) false
+        else isCorrectPass(hash = user?.passwordHash!!, password = password)
+    }
+
+    private fun hashPass(password: String): String =
+        Bcrypt.hash(password, SALT_ROUNDS).toString()
+
+    private fun isCorrectPass(hash: String, password: String): Boolean =
+        Bcrypt.verify(password, hash.toByteArray())
 
     private fun encodeJWT(userData: Pair<String, Int>): String {
         return JWT.create()
@@ -69,6 +92,8 @@ class AuthService(
             }
         }
 
+        // salt rounds
+        private const val SALT_ROUNDS = 5
 
         // .env vars
         val JWT_SECRET: String = System.getenv("JWT_SECRET")
