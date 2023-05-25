@@ -1,12 +1,14 @@
-FROM gradle:7-jdk11 AS build
-LABEL authors="eeyan"
-COPY --chown=gradle:gradle . /home/gradle/src
-WORKDIR /home/gradle/src
-RUN gradle :server:buildFatJar --no-daemon
-
+# jdk image
 FROM openjdk:11
-EXPOSE 3000:3000
+# create new app folder
 RUN mkdir /app
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/server.jar
-
-ENTRYPOINT ["java", "-jar", "/app/server.jar"]
+# default working env
+WORKDIR /app
+# copy all files
+COPY . /app
+# build the server
+RUN ./gradlew buildFatJar --no-daemon
+# expose port to network
+EXPOSE 3000:3000
+# run jar file
+ENTRYPOINT ["java", "-jar", "./server/build/libs/server-all.jar"]
