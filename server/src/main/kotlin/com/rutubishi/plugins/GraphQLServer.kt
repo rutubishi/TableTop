@@ -8,6 +8,7 @@ import org.koin.ktor.ext.inject
 
 fun Application.configureGraphQL() {
     install(GraphQL){
+//        useDefaultPrettyPrinter = true
         endpoint = "/graphql"
         playground = true
         schema {
@@ -21,6 +22,15 @@ fun Application.configureGraphQL() {
             /**
              * Queries - Read operations
              * */
+
+            /**
+             * Subscriptions - Realtime operations
+             * */
+
+            /**
+             * Types - Custom types
+             * */
+
         }
     }
 }
