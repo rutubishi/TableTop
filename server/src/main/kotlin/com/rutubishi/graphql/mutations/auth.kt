@@ -1,36 +1,36 @@
 package com.rutubishi.graphql.mutations
 
-import com.apurebase.kgraphql.KGraphQL.Companion.schema
-import com.apurebase.kgraphql.schema.Schema
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.rutubishi.services.AuthService
 
 class AuthMutation(
     private val authService: AuthService
-): BaseMutation {
+): AbstractMutation() {
 
-    override fun register(): Array<() -> Schema> {
-        return arrayOf(::signUp, ::signIn)
+    override fun register(schemaBuilder: SchemaBuilder) {
+        super.register(schemaBuilder)
+        signUp()
+        signIn()
     }
 
 
-    fun signUp() =
-        schema {
+    private fun signUp() =
+        builder.
             mutation("register") {
                 resolver { email: String, fullName: String, phone: String, password: String ->
-                    authService.createAccount(email, fullName, phone, password)
+                    "authService.createAccount($email, $fullName, $phone, $password)"
                 }
             }
-        }
 
-    fun signIn() =
-        schema {
+
+    private fun signIn() =
+        builder.
             mutation("signIn") {
                 resolver { email: String, password: String ->
-                    authService.loginAccount(email, password)
+                    "email: $email, password: $password"
                 }
             }
-        }
+
 
 
 }
