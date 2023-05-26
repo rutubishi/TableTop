@@ -1,0 +1,109 @@
+package com.rutubishi.services
+
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import com.rutubishi.data.db.User
+import com.rutubishi.data.repository.AuthRepository
+import com.rutubishi.graphql.mutations.AuthMutation
+import com.toxicbakery.bcrypt.Bcrypt
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import java.util.*
+
+class AuthService(
+    private val authRepository: AuthRepository
+) {
+
+    @Throws(Exception::class)
+    fun createAccount(
+        email: String,
+        fullName: String,
+        phone: String,
+        password: String
+    ): AuthMutation.Companion.AuthOutput {
+        val user = authRepository
+            .createUser(
+                email = email,
+                name = fullName,
+                phone = phone,
+                password = hashPass(password)
+            )
+        return AuthMutation.Companion.AuthOutput(
+            token = encodeJWT(Pair(email, user?.id?.value!!))
+        )
+    }
+
+    @Throws(Exception::class)
+    fun loginAccount(
+        email: String,
+        password: String,
+    ): AuthMutation.Companion.AuthOutput {
+        val user: User? = authRepository
+            .findUserByIdOrEmail(
+                email = email
+            )
+        print("id: ${user?.id}, email: ${user?.email}")
+        return if(user == null) AuthMutation.Companion.AuthOutput(token = null)
+        else if(!isCorrectPass(hash = user.passwordHash, password = password))
+            AuthMutation.Companion.AuthOutput(token = null)
+        else AuthMutation.Companion.AuthOutput(
+            token = encodeJWT(Pair(email, user.id.value))
+        )
+    }
+
+    private fun hashPass(password: String): String =
+        Bcrypt.hash(password, SALT_ROUNDS).toString()
+
+    private fun isCorrectPass(hash: String, password: String): Boolean =
+        Bcrypt.verify(password, hash.toByteArray())
+
+    private fun encodeJWT(userData: Pair<String, Long>): String {
+        return JWT.create()
+            .withClaim("userdata", userData.toList().toMutableList())
+            .withExpiresAt(
+                Date(System.currentTimeMillis() + 6000))
+            .sign(Algorithm.HMAC256(JWT_SECRET))
+    }
+
+    private fun decodeJWT(token: String): Pair<String, Int>{
+        return TODO()
+    }
+
+    companion object {
+        // setup JWT configuration
+        fun Application.configureJWT() {
+            authentication {
+                jwt {
+                    val jwtAudience = this@configureJWT.environment.config.property("jwt.audience").getString()
+                    realm = this@configureJWT.environment.config.property("jwt.realm").getString()
+                    verifier(JWT
+                            .require(Algorithm.HMAC256(JWT_SECRET))
+                            .withAudience(jwtAudience)
+                            .withIssuer(this@configureJWT.environment.config.property("jwt.domain").getString())
+                            .build()
+                    )
+                    validate { credential ->
+                        if (credential.payload.audience.contains(jwtAudience))
+                            JWTPrincipal(credential.payload)
+                        else
+                            null
+                    }
+                }
+            }
+        }
+
+        // salt rounds
+        private const val SALT_ROUNDS = 5
+
+        // .env vars
+        val JWT_SECRET: String = System.getenv("JWT_SECRET")
+
+
+
+
+    }
+
+}

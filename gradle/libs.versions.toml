@@ -7,6 +7,8 @@ core-ktx = "1.9.0"
 ui-tooling-preview = "1.4.2"
 coil-compose= "2.4.0"
 kamel-image = "0.4.0"
+koin = "3.4.0"
+bcrypt = "1.0.9"
 
 # test
 test-compose = "1.4.3"
@@ -38,6 +40,11 @@ kgraphql= "0.19.0"
 ktor = "2.3.0"
 kotlin-test = "1.8.21"
 logback = "1.2.11"
+postgres="42.5.1"
+h2="2.1.214"
+exposed="0.41.1"
+eh-cache="3.10.8"
+hikaricp="5.0.1"
 
 [libraries]
 # dev
@@ -48,6 +55,10 @@ core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui-tooling-preview" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 kamel-image = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kamel-image" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
+bcrypt = { module = "com.ToxicBakery.library.bcrypt:bcrypt", version.ref = "bcrypt" }
 
 # test
 test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "test-compose" }
@@ -62,8 +73,22 @@ material = { group = "com.google.android.material", name = "material", version.r
 
 ## SERVER
 kgraphql = { module = "com.apurebase:kgraphql", version.ref = "kgraphql" }
+kgraphql-ktor = { module = "com.apurebase:kgraphql-ktor", version.ref = "kgraphql" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor" }
+ktor-server-auth = { module = "io.ktor:ktor-server-auth-jvm", version.ref = "ktor" }
+ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt-jvm", version.ref = "ktor" }
+ktor-server-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }
+ktor-server-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
+postgres = { module = "org.postgresql:postgresql", version.ref = "postgres" }
+h2 = { module = "com.h2database:h2", version.ref = "h2" }
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
+exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
+hikaricp = { module = "com.zaxxer:HikariCP", version.ref = "hikaricp" }
+eh-cache = { module = "org.ehcache:ehcache", version.ref = "eh-cache" }
 ktor-server-test = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-test" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
@@ -72,7 +97,10 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 dev = [ "activity-compose", "ui-tooling-preview" ]
 test = [ "test-compose" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
-server-main = [ "kgraphql", "ktor-server-netty", "ktor-server-core", "logback" ]
+server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-core", "logback",
+    "ktor-server-content-negotiation", "ktor-server-auth", "ktor-server-auth-jwt", "ktor-server-serialization", "postgres", "h2",
+    "exposed-core", "exposed-jdbc", "exposed-dao", "eh-cache", "hikaricp", "koin-ktor", "bcrypt", "ktor-server-yaml",
+    "ktor-server-status-pages"]
 server-test = [ "ktor-server-test", "kotlin-test-junit" ]
 
 [plugins]

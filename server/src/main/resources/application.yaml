@@ -1,0 +1,11 @@
+ktor:
+    deployment:
+        port: 3000
+    application:
+        modules:
+            - "com.rutubishi.ApplicationKt.module"
+jwt:
+    issuer: "http://0.0.0.0:3000/"
+    audience: "http://0.0.0.0:3000/graphql"
+    realm: "Access to 'graphql'"
+    domain: "https://example.com"

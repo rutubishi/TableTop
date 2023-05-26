@@ -1,0 +1,55 @@
+name: App Build & Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+    build:
+      strategy:
+        fail-fast: true
+        matrix:
+          os: [ ubuntu-latest ]
+          java: [ 11, 17 ]
+      runs-on: ${{ matrix.os }}
+      steps:
+        - uses: actions/checkout@v3
+        - name: Set up JDK ${{ matrix.java }}
+          uses: actions/setup-java@v3
+          with:
+            java-version: ${{ matrix.java }}
+            distribution: 'corretto'
+            architecture: x64
+        - name: Server Build
+          run: ./gradlew :server:build
+          env:
+            JWT_SECRET: big_secret
+
+    server-tests:
+      services:
+        postgres:
+          image: postgres
+          env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+          ports:
+            - 5432:5432
+          options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      needs:
+        - build
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Set up JDK 11
+          uses: actions/setup-java@v3
+          with:
+            java-version: 11
+            distribution: 'corretto'
+            architecture: x64
+        - name: Server Tests
+          run: ./gradlew :server:test

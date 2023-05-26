@@ -2,10 +2,11 @@
 plugins {
     kotlin("jvm")
     id("io.ktor.plugin")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 application {
-    mainClass.set("com.rutubishi.ApplicationKt")
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
 dependencies {
