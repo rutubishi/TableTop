@@ -4,9 +4,8 @@ import com.rutubishi.data.db.User
 import com.rutubishi.data.db.Users
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.or
-import org.koin.core.component.KoinComponent
 
-interface AuthRepository: KoinComponent {
+interface AuthRepository {
     @Throws(Exception::class)
     fun createUser(
         name: String,
@@ -20,7 +19,7 @@ interface AuthRepository: KoinComponent {
         email: String? = null): User?
 }
 
-internal class AuthRepoImpl(appDB: Database):
+class AuthRepoImpl(appDB: Database):
     BaseRepository(appDB), AuthRepository {
     override fun createUser(name: String, email: String, phone: String, password: String): User? {
         var user: User? = null

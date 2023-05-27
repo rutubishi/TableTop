@@ -5,7 +5,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object TableTopDBFactory {
-    private val schemas:Array<Table> = arrayOf(
+    val schemas:Array<Table> = arrayOf(
         Users
     );
     fun init(dataSource: HikariDataSource): Database {

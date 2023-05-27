@@ -59,6 +59,7 @@ kamel-image = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kame
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 bcrypt = { module = "com.ToxicBakery.library.bcrypt:bcrypt", version.ref = "bcrypt" }
 
 # test
@@ -103,7 +104,7 @@ server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-c
     "ktor-server-content-negotiation", "ktor-server-auth", "ktor-server-auth-jwt", "ktor-server-serialization", "postgres", "h2",
     "exposed-core", "exposed-jdbc", "exposed-dao", "eh-cache", "hikaricp", "koin-ktor", "bcrypt", "ktor-server-yaml",
     "ktor-server-status-pages"]
-server-test = [ "ktor-server-test", "kotlin-test-junit" ]
+server-test = [ "ktor-server-test", "kotlin-test-junit", "koin-test" ]
 
 [plugins]
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
