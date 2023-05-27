@@ -2,10 +2,11 @@ package com.rutubishi.data.repository
 
 import com.rutubishi.data.db.User
 import com.rutubishi.data.db.Users
+import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.or
-import org.jetbrains.exposed.sql.transactions.transaction
+import org.koin.core.component.KoinComponent
 
-interface AuthRepository {
+interface AuthRepository: KoinComponent {
     @Throws(Exception::class)
     fun createUser(
         name: String,
@@ -19,10 +20,11 @@ interface AuthRepository {
         email: String? = null): User?
 }
 
-internal class AuthRepoImpl: AuthRepository {
+internal class AuthRepoImpl(appDB: Database):
+    BaseRepository(appDB), AuthRepository {
     override fun createUser(name: String, email: String, phone: String, password: String): User? {
         var user: User? = null
-        transaction {
+        dbQuery {
             user = User.new {
                 this.email = email
                 this.name = name
@@ -37,7 +39,7 @@ internal class AuthRepoImpl: AuthRepository {
         return if(id == null && email == null) null
         else {
             var user: User? = null
-            transaction {
+            dbQuery {
                 user = User
                     .find { (Users.email eq (email?: "")) or (Users.id eq (id?: 0))  }
                     .limit(n = 1)
