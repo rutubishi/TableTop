@@ -1,11 +1,11 @@
 package com.rutubishi.services
 
+import at.favre.lib.crypto.bcrypt.BCrypt
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.rutubishi.data.db.User
 import com.rutubishi.data.repository.AuthRepository
 import com.rutubishi.graphql.mutations.AuthMutation
-import com.toxicbakery.bcrypt.Bcrypt
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -55,13 +55,19 @@ class AuthService(
     }
 
     private fun hashPass(password: String): String =
-        Bcrypt.hash(password, SALT_ROUNDS).toString()
+        BCrypt
+            .withDefaults()
+            .hashToString(SALT_ROUNDS, password.toCharArray())
 
     private fun isCorrectPass(hash: String, password: String): Boolean =
-        Bcrypt.verify(password, hash.toByteArray())
+        BCrypt
+            .verifyer()
+            .verify(password.toCharArray(), hash)
+            .verified
 
     private fun encodeJWT(userData: Pair<String, Long>): String {
-        return JWT.create()
+        return JWT
+            .create()
             .withClaim("userdata", userData.toList().toMutableList())
             .withExpiresAt(
                 Date(System.currentTimeMillis() + 6000))
@@ -69,7 +75,14 @@ class AuthService(
     }
 
     private fun decodeJWT(token: String): Pair<String, Int>{
-        return TODO()
+        return JWT
+            .decode(token)
+            .getClaim("userdata")
+            .asList(Any::class.java).apply {
+                if(this.size != 2) throw Exception("Invalid token")
+            }.let {
+                Pair(it[0].toString(), it[1].toString().toInt())
+            }
     }
 
     companion object {
@@ -79,7 +92,8 @@ class AuthService(
                 jwt {
                     val jwtAudience = this@configureJWT.environment.config.property("jwt.audience").getString()
                     realm = this@configureJWT.environment.config.property("jwt.realm").getString()
-                    verifier(JWT
+                    verifier(
+                        JWT
                             .require(Algorithm.HMAC256(JWT_SECRET))
                             .withAudience(jwtAudience)
                             .withIssuer(this@configureJWT.environment.config.property("jwt.domain").getString())

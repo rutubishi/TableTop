@@ -8,10 +8,10 @@ ui-tooling-preview = "1.4.2"
 coil-compose= "2.4.0"
 kamel-image = "0.4.0"
 koin = "3.4.0"
-bcrypt = "1.0.9"
 
 # test
 test-compose = "1.4.3"
+faker = "1.0.2"
 
 # debug
 ui-test-manifest = "1.4.3"
@@ -45,6 +45,8 @@ h2="2.1.214"
 exposed="0.41.1"
 eh-cache="3.10.8"
 hikaricp="5.0.1"
+bcrypt="0.4.0"
+bcrypt-favre="0.10.2"
 
 [libraries]
 # dev
@@ -58,11 +60,12 @@ kamel-image = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kame
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
-bcrypt = { module = "com.ToxicBakery.library.bcrypt:bcrypt", version.ref = "bcrypt" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 # test
 test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "test-compose" }
 junit4 = { module = "junit:junit", version = "4.13.2" }
+faker = { module = "io.github.serpro69:kotlin-faker", version.ref = "faker" }
 
 # debug
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "ui-test-manifest" }
@@ -92,16 +95,18 @@ eh-cache = { module = "org.ehcache:ehcache", version.ref = "eh-cache" }
 ktor-server-test = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-test" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+bcrypt = { module = "com.mindrot:jbcrypt", version.ref = "bcrypt" }
+bcrypt-favre = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt-favre" }
 
 [bundles]
 dev = [ "activity-compose", "ui-tooling-preview" ]
-test = [ "test-compose" ]
+test = [ "test-compose", "faker" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
 server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-core", "logback",
     "ktor-server-content-negotiation", "ktor-server-auth", "ktor-server-auth-jwt", "ktor-server-serialization", "postgres", "h2",
-    "exposed-core", "exposed-jdbc", "exposed-dao", "eh-cache", "hikaricp", "koin-ktor", "bcrypt", "ktor-server-yaml",
+    "exposed-core", "exposed-jdbc", "exposed-dao", "eh-cache", "hikaricp", "koin-ktor", "bcrypt-favre", "ktor-server-yaml",
     "ktor-server-status-pages"]
-server-test = [ "ktor-server-test", "kotlin-test-junit" ]
+server-test = [ "ktor-server-test", "kotlin-test-junit", "koin-test" ]
 
 [plugins]
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
