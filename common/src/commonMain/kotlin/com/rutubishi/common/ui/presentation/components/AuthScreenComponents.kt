@@ -3,13 +3,17 @@ package com.rutubishi.common.ui.presentation.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
@@ -77,38 +81,86 @@ fun AuthTitle(
 
 @Composable
 fun AuthScreen(
+    tabletMode: Boolean = false,
     modifier: Modifier = Modifier,
-    pageName: String = "",
     title: String = "",
     bannerImg: Painter,
     bannerDescription: String? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .background(
-                color = MaterialTheme.colorScheme.background)
-    ){
 
-        AuthBanner(
-            painter = bannerImg,
-            contentDescription = bannerDescription,
+
+    if (tabletMode) {
+
+        Row(
             modifier = Modifier
-                .height(350.dp)
-        )
+                .fillMaxHeight()
+                .background(color = MaterialTheme.colorScheme.background)
+        ) {
 
-        AuthTitle(
-            text = title
-        )
+            AuthBanner(
+                painter = bannerImg,
+                contentDescription = bannerDescription,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.5f)
+            )
 
-        Column(modifier = modifier) {
-            content()
+            Column(
+                modifier = modifier
+                    .fillMaxHeight()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Center
+            ) {
+                AuthTitle(
+                    text = title
+                )
+                content()
+            }
+
         }
 
+    }else {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .background(color = MaterialTheme.colorScheme.background)
+                .verticalScroll(rememberScrollState())
+        ) {
+
+            AuthBanner(
+                painter = bannerImg,
+                contentDescription = bannerDescription,
+                modifier = Modifier
+                    .height(350.dp)
+            )
+
+            AuthTitle(
+                text = title
+            )
+
+            Column(modifier = modifier) {
+                content()
+            }
+
+        }
     }
 
+}
+
+
+@Composable
+fun AuthScreenItems(): Pair<(@Composable () -> Unit), (@Composable () -> Unit)> {
+
+    return Pair(
+        first = @Composable {
+
+        },
+        second = @Composable {
+
+        }
+    )
 }
 
 @Composable
@@ -264,7 +316,7 @@ fun AuthHelperText(
             }
         },
         modifier = modifier
-            .padding(top = 16.dp)
+            .padding(top = 16.dp, bottom = 16.dp)
             .clickable { onClick() },
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.bodyLarge,

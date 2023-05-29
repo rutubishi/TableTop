@@ -23,6 +23,7 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
+                api(libs.windowClassSizesCompose)
                 implementation(libs.koin.core)
             }
         }
