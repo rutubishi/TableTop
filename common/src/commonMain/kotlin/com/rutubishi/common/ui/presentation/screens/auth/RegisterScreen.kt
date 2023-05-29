@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import com.rutubishi.common.ui.presentation.components.AuthButton
@@ -58,7 +59,10 @@ fun RegisterScreen(
             enabled = text.isNotEmpty(),
         )
 
-        AuthHelperText {
+        AuthHelperText(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+        ) {
             /*TODO()*/
         }
 

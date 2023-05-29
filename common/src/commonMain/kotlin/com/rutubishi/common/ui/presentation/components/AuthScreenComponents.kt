@@ -246,6 +246,7 @@ fun AuthButton(
 
 @Composable
 fun AuthHelperText(
+    modifier: Modifier = Modifier,
     isSignUp: Boolean = false,
     onClick: () -> Unit,
 ) {
@@ -262,8 +263,7 @@ fun AuthHelperText(
                 append("Sign ${if (isSignUp) "in" else "up"}")
             }
         },
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .padding(top = 16.dp)
             .clickable { onClick() },
         textAlign = TextAlign.Center,
