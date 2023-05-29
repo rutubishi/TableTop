@@ -10,3 +10,4 @@ import androidx.compose.ui.graphics.painter.Painter
 internal expect fun getOnboardingImage(): Painter
 @Composable
 internal expect fun getOnBoardingButtonIcon(): Painter
+
