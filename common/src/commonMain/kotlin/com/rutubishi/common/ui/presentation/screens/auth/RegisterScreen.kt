@@ -21,14 +21,16 @@ import com.rutubishi.common.ui.presentation.components.PhoneTextField
 @ExperimentalMaterial3Api
 fun RegisterScreen(
     modifier: Modifier = Modifier,
+    tabletMode: Boolean = false,
+    onNavigateToLogin: () -> Unit = {},
     bannerImg: Painter,
 ) {
 
     var text by rememberSaveable { mutableStateOf("") }
 
     AuthScreen(
+        tabletMode = tabletMode,
         modifier = modifier,
-        pageName = "Register",
         title = "Register",
         bannerImg = bannerImg
     ) {
@@ -63,7 +65,7 @@ fun RegisterScreen(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
         ) {
-            /*TODO()*/
+            onNavigateToLogin()
         }
 
     }

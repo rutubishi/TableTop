@@ -2,10 +2,7 @@ package com.rutubishi.common.ui.presentation.screens.auth
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
@@ -26,15 +24,17 @@ import com.rutubishi.common.ui.presentation.components.PasswordTextField
 @Composable
 @ExperimentalMaterial3Api
 fun LoginScreen(
+    tabletMode: Boolean = false,
     modifier: Modifier = Modifier,
+    onNavigateToRegister: () -> Unit = {},
     bannerImg: Painter,
 ) {
 
     var email by rememberSaveable { mutableStateOf("") }
 
     AuthScreen(
+        tabletMode = tabletMode,
         modifier = modifier,
-        pageName = "Login",
         title = "Login",
         bannerImg = bannerImg
     ){
@@ -67,7 +67,9 @@ fun LoginScreen(
             enabled = email.isNotEmpty(),
         )
 
-        AuthHelperText(isSignUp = false) { /*TODO*/ }
+        AuthHelperText(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            isSignUp = false) { onNavigateToRegister() }
 
 
     }
