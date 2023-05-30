@@ -24,7 +24,6 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
-                api(libs.windowClassSizesCompose)
                 api(libs.apollo.runtime)
                 implementation(libs.koin.core)
             }

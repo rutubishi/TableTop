@@ -1,6 +1,0 @@
-# noinspection GraphQLUnresolvedReference
-mutation SignIn($input: SignInInput!) {
-  signIn(signIn: $input) {
-    token
-  }
-}

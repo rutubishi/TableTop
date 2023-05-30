@@ -20,8 +20,8 @@ type Query {
 }
 
 type Mutation {
-  signIn(signIn: SignInInput!): AuthOutput
-  signUp(signUp: SignUpInput!): AuthOutput
+  signIn(signIn: SignInInput!): AuthOutput!
+  signUp(signUp: SignUpInput!): AuthOutput!
 }
 
 type Subscription {

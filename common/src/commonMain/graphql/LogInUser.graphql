@@ -1,0 +1,6 @@
+# noinspection GraphQLUnresolvedReference
+mutation LoginUser($email: String!, $password: String!) {
+  signIn(signIn: {email: $email, password: $password}) {
+    token
+  }
+}
