@@ -31,7 +31,7 @@ class AuthMutation(
 
     private fun signUp() =
         builder.
-            mutation("register") {
+            mutation("signUp") {
                 resolver { signUp: SignUpInput ->
                     authService.createAccount(
                         signUp.email,

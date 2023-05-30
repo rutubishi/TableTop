@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
+    id("com.apollographql.apollo3")
 }
 
 group = "com.rutubishi"
@@ -23,6 +24,7 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
+                api(libs.apollo.runtime)
                 implementation(libs.koin.core)
             }
         }
@@ -69,5 +71,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+apollo {
+    service("service"){
+        packageName.set("com.rutubishi.common.data.network")
     }
 }

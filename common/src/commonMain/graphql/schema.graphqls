@@ -1,0 +1,35 @@
+# noinspection GraphQLUnresolvedReference
+type AuthOutput {
+  token: String
+}
+
+type SignInInput {
+  email: String!
+  password: String!
+}
+
+type SignUpInput {
+  email: String!
+  password: String!
+  phone: String!
+  fullName: String!
+}
+
+type Query {
+  me: String
+}
+
+type Mutation {
+  signIn(signIn: SignInInput!): AuthOutput
+  signUp(signUp: SignUpInput!): AuthOutput
+}
+
+type Subscription {
+  userCreated: Boolean
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
