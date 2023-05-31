@@ -19,11 +19,11 @@ class AuthMutation(
             name = "Authentication"
             description = "Registration / Login response"
         }
-        builder.type(SignInInput::class) {
+        builder.inputType(SignInInput::class) {
             name = "SignInInput"
             description = "Input for sign in"
         }
-        builder.type(SignUpInput::class) {
+        builder.inputType(SignUpInput::class) {
             name = "SignUpInput"
             description = "Input for sign up"
         }

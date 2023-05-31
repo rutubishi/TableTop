@@ -108,7 +108,7 @@ bcrypt-favre = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt-favre" }
 
 [bundles]
 dev = [ "activity-compose", "ui-tooling-preview", "koin-android", "koin-androidx-navigation", "koin-androidx-compose", "navigation-compose" ]
-test = [ "test-compose", "faker" ]
+test = [ "test-compose" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
 server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-core", "logback",
     "ktor-server-content-negotiation", "ktor-server-auth", "ktor-server-auth-jwt", "ktor-server-serialization", "postgres", "h2",

@@ -20,7 +20,7 @@ type Query {
 }
 
 type Mutation {
-  signIn(signIn: SignInInput!): AuthOutput!
+  signIn(email: String!, password: String!): AuthOutput!
   signUp(signUp: SignUpInput!): AuthOutput!
 }
 
