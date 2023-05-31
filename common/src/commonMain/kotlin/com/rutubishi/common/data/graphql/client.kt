@@ -1,3 +1,5 @@
+package com.rutubishi.common.data.graphql
+
 import com.apollographql.apollo3.ApolloClient
 
 object GraphQLClient {

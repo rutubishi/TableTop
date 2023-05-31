@@ -3,9 +3,9 @@ package com.rutubishi.services
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.rutubishi.common.data.graphql.models.AuthOutput
 import com.rutubishi.data.db.User
 import com.rutubishi.data.repository.AuthRepository
-import com.rutubishi.graphql.mutations.AuthMutation
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -23,7 +23,7 @@ class AuthService(
         fullName: String,
         phone: String,
         password: String
-    ): AuthMutation.Companion.AuthOutput {
+    ): AuthOutput {
         val user = authRepository
             .createUser(
                 email = email,
@@ -31,7 +31,7 @@ class AuthService(
                 phone = phone,
                 password = hashPass(password)
             )
-        return AuthMutation.Companion.AuthOutput(
+        return AuthOutput(
             token = encodeJWT(Pair(email, user?.id?.value!!))
         )
     }
@@ -40,16 +40,16 @@ class AuthService(
     fun loginAccount(
         email: String,
         password: String,
-    ): AuthMutation.Companion.AuthOutput {
+    ): AuthOutput {
         val user: User? = authRepository
             .findUserByIdOrEmail(
                 email = email
             )
         print("id: ${user?.id}, email: ${user?.email}")
-        return if(user == null) AuthMutation.Companion.AuthOutput(token = null)
+        return if(user == null) AuthOutput(token = null)
         else if(!isCorrectPass(hash = user.passwordHash, password = password))
-            AuthMutation.Companion.AuthOutput(token = null)
-        else AuthMutation.Companion.AuthOutput(
+            AuthOutput(token = null)
+        else AuthOutput(
             token = encodeJWT(Pair(email, user.id.value))
         )
     }

@@ -107,7 +107,9 @@ bcrypt = { module = "com.mindrot:jbcrypt", version.ref = "bcrypt" }
 bcrypt-favre = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt-favre" }
 
 [bundles]
-dev = [ "activity-compose", "ui-tooling-preview", "koin-android", "koin-androidx-navigation", "koin-androidx-compose", "navigation-compose" ]
+dev = [ "activity-compose", "ui-tooling-preview", "koin-android",
+    "koin-androidx-navigation", "koin-androidx-compose", "navigation-compose",
+    "windowClassSizesCompose" ]
 test = [ "test-compose" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
 server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-core", "logback",

@@ -15,11 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.rutubishi.common.ui.presentation.components.AuthButton
-import com.rutubishi.common.ui.presentation.components.AuthHelperText
-import com.rutubishi.common.ui.presentation.components.AuthScreen
-import com.rutubishi.common.ui.presentation.components.EmailTextField
-import com.rutubishi.common.ui.presentation.components.PasswordTextField
+import com.rutubishi.common.ui.presentation.components.*
 
 @Composable
 @ExperimentalMaterial3Api
@@ -31,6 +27,11 @@ fun LoginScreen(
 ) {
 
     var email by rememberSaveable { mutableStateOf("") }
+
+//    LaunchedEffect(Unit) {
+//        val response = GraphQLClient.client.query(TestQuery()).execute()
+//        println("response: ${response.data?.test}}")
+//    }
 
     AuthScreen(
         tabletMode = tabletMode,

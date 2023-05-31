@@ -4,3 +4,9 @@ mutation LoginUser($email: String!, $password: String!) {
     token
   }
 }
+
+query TestQuery {
+  test {
+    message
+  }
+}

@@ -76,6 +76,7 @@ android {
 
 apollo {
     service("service"){
+        schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
         packageName.set("com.rutubishi.common.data.network")
     }
 }

@@ -1,8 +1,11 @@
 package com.rutubishi.graphql.mutations
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
+import com.rutubishi.common.data.graphql.models.AuthOutput
+import com.rutubishi.common.data.graphql.models.SignInInput
+import com.rutubishi.common.data.graphql.models.SignUpInput
+import com.rutubishi.common.data.graphql.models.TestOutput
 import com.rutubishi.services.AuthService
-import kotlinx.serialization.Serializable
 
 class AuthMutation(
     private val authService: AuthService
@@ -12,6 +15,7 @@ class AuthMutation(
         super.register(schemaBuilder)
         signUp()
         signIn()
+        testQuery()
     }
 
     override fun registerTypes() {
@@ -26,6 +30,10 @@ class AuthMutation(
         builder.inputType(SignUpInput::class) {
             name = "SignUpInput"
             description = "Input for sign up"
+        }
+        builder.type(TestOutput::class){
+            name = "TestOutput"
+            description = "Test output"
         }
     }
 
@@ -53,27 +61,13 @@ class AuthMutation(
                 }
             }
 
+    private fun testQuery() =
+        builder.
+            query("test") {
+                resolver { ->
+                    TestOutput("Hello welcome to GraphQL")
+                }
+            }
 
-    companion object {
-        @Serializable
-        data class AuthOutput(
-            val token: String?
-        )
-
-        @Serializable
-        data class SignInInput(
-            val email: String,
-            val password: String
-        )
-
-        @Serializable
-        data class SignUpInput(
-            val email: String,
-            val fullName: String,
-            val phone: String,
-            val password: String
-        )
-
-    }
 
 }

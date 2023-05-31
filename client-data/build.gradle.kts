@@ -35,4 +35,5 @@ android {
 
 dependencies {
     implementation(libs.core.ktx)
+    testImplementation(libs.bundles.test)
 }
