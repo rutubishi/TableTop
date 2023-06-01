@@ -1,8 +1,11 @@
 package com.rutubishi.common.data.repository
 
 import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.api.Mutation
+import com.apollographql.apollo3.api.Query
 import com.rutubishi.common.data.graphql.models.AuthOutput
 import com.rutubishi.common.data.network.LoginUserMutation
+import com.rutubishi.common.data.network.RegisterUserMutation
 import com.rutubishi.common.data.network.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,7 +20,7 @@ class AuthRepository(
             val response = appClient.mutation(LoginUserMutation(email, password)).execute()
             val data = response.data
             if (data != null) {
-                val authOutput = AuthOutput(token = data.signIn.token,)
+                val authOutput = AuthOutput(token = data.signIn.token)
                 emit(Resource.Success(authOutput))
             } else emit(Resource.Error(response.errors?.first()?.message ?: "Unknown error"))
         }catch (e: Exception){
@@ -31,7 +34,17 @@ class AuthRepository(
         fullName: String,
         phone: String
     ): Flow<Resource<AuthOutput>> = flow {
-        TODO("Not yet implemented")
+        emit(Resource.Loading())
+        try {
+            val response = appClient.mutation(RegisterUserMutation(email, fullName, phone, password)).execute()
+            val data = response.data
+            if (data != null) {
+                val authOutput = AuthOutput(token = data.signUp.token)
+                emit(Resource.Success(authOutput))
+            } else emit(Resource.Error(response.errors?.first()?.message ?: "Unknown error"))
+        }catch (e: Exception){
+            emit(Resource.Error(e.message ?: "Unknown error"))
+        }
     }
 
 }

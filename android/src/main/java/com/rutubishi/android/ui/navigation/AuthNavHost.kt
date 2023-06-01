@@ -1,7 +1,6 @@
 package com.rutubishi.android.ui.navigation
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -15,7 +14,6 @@ import com.rutubishi.common.ui.presentation.screens.auth.RegisterScreen
 
 @Composable
 @ExperimentalMaterial3Api
-@ExperimentalMaterial3WindowSizeClassApi
 fun AuthNavHost(
     modifier: Modifier = Modifier,
     tabletMode: Boolean,

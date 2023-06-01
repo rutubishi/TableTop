@@ -8,12 +8,12 @@ type AuthOutput {
   token: String
 }
 
-type SignInInput {
+input SignInInput {
   email: String!
   password: String!
 }
 
-type SignUpInput {
+input SignUpInput {
   email: String!
   password: String!
   phone: String!
@@ -29,8 +29,8 @@ type Query {
 }
 
 type Mutation {
-  signIn(email: String!, password: String!): AuthOutput!
-  signUp(signUp: SignUpInput!): AuthOutput!
+  signIn(signIn: SignInInput): AuthOutput!
+  signUp(signUp: SignUpInput): AuthOutput!
 }
 
 type Subscription {

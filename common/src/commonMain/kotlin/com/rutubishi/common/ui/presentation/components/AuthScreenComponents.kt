@@ -202,10 +202,6 @@ fun PasswordTextField(
 fun EmailTextField(
     email: String,
     onEmailChange: (String) -> Unit,
-    emailLeadingIcon: @Composable () -> Unit =
-        { Icon(
-            imageVector = Icons.Default.Email,
-            contentDescription = null) },
 ) {
 
     TextField(
@@ -215,7 +211,9 @@ fun EmailTextField(
         value = email,
         onValueChange = onEmailChange,
         label = { Text(text = "Email") },
-        leadingIcon = emailLeadingIcon,
+        leadingIcon = { Icon(
+            imageVector = Icons.Default.Email,
+            contentDescription = null) },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email),
     )

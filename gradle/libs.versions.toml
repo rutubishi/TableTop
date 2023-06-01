@@ -11,7 +11,7 @@ coil-compose= "2.4.0"
 kamel-image = "0.4.0"
 koin = "3.4.0"
 apollo-client = "3.8.2"
-
+coroutines-ktx = "1.7.1"
 # test
 test-compose = "1.4.3"
 faker = "1.0.2"
@@ -69,6 +69,7 @@ koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", versi
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 apollo-runtime = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo-client" }
+coroutines-ktx = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines-ktx" }
 
 # test
 test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "test-compose" }
