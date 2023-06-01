@@ -5,18 +5,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.rutubishi.common.data.graphql.GraphQLClient
-import com.rutubishi.common.data.network.Resource
-import com.rutubishi.common.data.repository.AuthRepository
-import com.rutubishi.common.ui.presentation.components.*
-import kotlinx.coroutines.flow.onEach
+import com.rutubishi.common.ui.presentation.components.AuthButton
+import com.rutubishi.common.ui.presentation.components.AuthHelperText
+import com.rutubishi.common.ui.presentation.components.AuthScreen
+import com.rutubishi.common.ui.presentation.components.EmailTextField
+import com.rutubishi.common.ui.presentation.components.PasswordTextField
 
 @Composable
 @ExperimentalMaterial3Api
@@ -29,22 +32,22 @@ fun LoginScreen(
 
     var email by rememberSaveable { mutableStateOf("") }
 
-    AuthRepository(GraphQLClient.client).login("testMail@gmail.com", "12345678",/*"Bigman Bazzuu","123456"*/)
-        .onEach { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    println("resource is loading: ${resource.data} \n" +
-                            " Message: ${resource.message}")
-                }
-                is Resource.Success -> {
-                    println("resource is success: ${resource.data?.token} \n Message: ${resource.message}")
-                }
-                is Resource.Error -> {
-                    println("resource is error: ${resource.data} \n" +
-                            " Message: ${resource.message}")
-                }
-            }
-        }.collectAsState(initial = Resource.Loading())
+//    AuthRepository(GraphQLClient.client).login("testMail@gmail.com", "12345678",/*"Bigman Bazzuu","123456"*/)
+//        .onEach { resource ->
+//            when (resource) {
+//                is Resource.Loading -> {
+//                    println("resource is loading: ${resource.data} \n" +
+//                            " Message: ${resource.message}")
+//                }
+//                is Resource.Success -> {
+//                    println("resource is success: ${resource.data?.token} \n Message: ${resource.message}")
+//                }
+//                is Resource.Error -> {
+//                    println("resource is error: ${resource.data} \n" +
+//                            " Message: ${resource.message}")
+//                }
+//            }
+//        }.collectAsState(initial = Resource.Loading())
 
 
     AuthScreen(

@@ -17,7 +17,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
@@ -197,25 +196,23 @@ fun PasswordTextField(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@ExperimentalMaterial3Api
 fun EmailTextField(
     email: String,
     onEmailChange: (String) -> Unit,
 ) {
 
     TextField(
+        value = email,
+        onValueChange = onEmailChange,
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp),
-        value = email,
-        onValueChange = onEmailChange,
-        label = { Text(text = "Email") },
+        label = { Text(text = "Full Name") },
         leadingIcon = { Icon(
-            imageVector = Icons.Default.Email,
+            imageVector = Icons.Default.AccountCircle,
             contentDescription = null) },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Email),
     )
 }
 
