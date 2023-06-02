@@ -1,6 +1,5 @@
 package com.rutubishi.android.ui.navigation
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rutubishi.android.R
-import com.rutubishi.android.ui.presentation.components.AppLoader
+import com.rutubishi.android.ui.presentation.viewmodels.AuthVM
 import com.rutubishi.common.ui.presentation.screens.auth.LoginScreen
 import com.rutubishi.common.ui.presentation.screens.auth.RegisterScreen
 
@@ -19,6 +18,8 @@ import com.rutubishi.common.ui.presentation.screens.auth.RegisterScreen
 fun AuthNavHost(
     modifier: Modifier = Modifier,
     tabletMode: Boolean,
+    authVM: AuthVM,
+    loader: @Composable () -> Unit = {},
     navController: NavHostController = rememberNavController(),
     startDestination: String = "login"
 ) {
@@ -31,14 +32,15 @@ fun AuthNavHost(
     ){
 
        composable("login"){
-           Column {
-                LoginScreen(
-                     tabletMode = tabletMode,
-                     modifier = modifier,
-                     bannerImg = painterResource(id = R.drawable.login),
-                     onNavigateToRegister = { navController.navigate("register") },
-                )
-           }
+           LoginScreen(
+               tabletMode = tabletMode,
+               modifier = modifier,
+               bannerImg = painterResource(id = R.drawable.login),
+               onNavigateToRegister = { navController.navigate("register") },
+               loader = loader,
+               onLogin = authVM::login,
+               screenState = authVM.authState.value,
+               )
         }
 
         composable("register"){
@@ -47,7 +49,10 @@ fun AuthNavHost(
                 modifier = modifier,
                 bannerImg = painterResource(id = R.drawable.register),
                 onNavigateToLogin = { navController.navigate("login") },
-            )
+                loader = loader,
+                onRegister = authVM::register,
+                screenState = authVM.authState.value,
+                )
         }
     }
 

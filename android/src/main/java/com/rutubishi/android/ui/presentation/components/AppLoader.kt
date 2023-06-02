@@ -21,8 +21,7 @@ fun AppLoader(
     modifier: Modifier = Modifier,
 ) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.app_loader))
-
-    AlertDialog(onDismissRequest = { },){
+    AlertDialog(onDismissRequest = { }){
         Box(modifier = modifier
             .size(200.dp),
             contentAlignment = Alignment.Center) {
@@ -32,7 +31,4 @@ fun AppLoader(
 
         }
     }
-
-
-
 }

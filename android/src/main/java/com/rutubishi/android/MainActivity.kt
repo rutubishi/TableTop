@@ -13,8 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rutubishi.android.ui.navigation.AuthNavHost
+import com.rutubishi.android.ui.presentation.components.AppLoader
+import com.rutubishi.android.ui.presentation.viewmodels.AuthVM
 import com.rutubishi.common.App
+import com.rutubishi.common.data.repository.AuthRepository
 import com.rutubishi.common.ui.theme.TableTopTheme
+import org.koin.androidx.compose.get
 
 class MainActivity : AppCompatActivity() {
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -22,12 +26,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TableTopTheme {
-
                 val windowSize = calculateWindowSizeClass(this)
                 val tabletMode = windowSize.widthSizeClass > WindowWidthSizeClass.Compact
 
+                // inject view-models
+                val authVM = AuthVM(AuthRepository(get()))
+
                 AuthNavHost(
                     tabletMode = tabletMode,
+                    authVM = authVM,
+                    loader = { AppLoader() },
                     modifier = Modifier
                         .padding(
                             start = 16.dp,

@@ -9,13 +9,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import com.rutubishi.common.ui.presentation.components.AuthButton
-import com.rutubishi.common.ui.presentation.components.AuthHelperText
-import com.rutubishi.common.ui.presentation.components.AuthScreen
-import com.rutubishi.common.ui.presentation.components.EmailTextField
-import com.rutubishi.common.ui.presentation.components.NameTextField
-import com.rutubishi.common.ui.presentation.components.PasswordTextField
-import com.rutubishi.common.ui.presentation.components.PhoneTextField
+import com.rutubishi.common.data.graphql.models.AuthOutput
+import com.rutubishi.common.data.network.Resource
+import com.rutubishi.common.ui.presentation.components.*
 
 @Composable
 @ExperimentalMaterial3Api
@@ -23,42 +19,53 @@ fun RegisterScreen(
     modifier: Modifier = Modifier,
     tabletMode: Boolean = false,
     onNavigateToLogin: () -> Unit = {},
+    onRegister: (String, String, String, String) -> Unit = { _, _, _, _ -> },
+    screenState: Resource<AuthOutput?> = Resource.Success(null),
+    loader: @Composable () -> Unit = {},
     bannerImg: Painter,
 ) {
 
-    var text by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf("") }
+    var phone by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
 
     AuthScreen(
         tabletMode = tabletMode,
         modifier = modifier,
         title = "Register",
-        bannerImg = bannerImg
+        bannerImg = bannerImg,
+        screenState = screenState,
+        loader = loader,
     ) {
 
         EmailTextField(
-            email = text,
-            onEmailChange = { text = it },
+            email = email,
+            onEmailChange = { email = it },
         )
 
         NameTextField(
-            name = text,
-            onNameChange = { text = it },
+            name = name,
+            onNameChange = { name = it },
         )
 
         PhoneTextField(
-            phone = text,
-            onPhoneChange = { text = it },
+            phone = phone,
+            onPhoneChange = { phone = it },
         )
 
         PasswordTextField(
-            password = text,
-            onPasswordChange = { text = it },
+            password = password,
+            onPasswordChange = { password = it },
         )
 
         AuthButton(
             text = "Register",
-            onClick = { /*TODO*/ },
-            enabled = text.isNotEmpty(),
+            onClick = { onRegister(email, password, name, phone) },
+            enabled = email.isNotEmpty()
+                    && password.isNotEmpty()
+                    && name.isNotEmpty()
+                    && phone.isNotEmpty()
         )
 
         AuthHelperText(

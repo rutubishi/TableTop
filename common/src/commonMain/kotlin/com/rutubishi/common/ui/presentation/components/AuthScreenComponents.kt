@@ -1,36 +1,12 @@
 package com.rutubishi.common.ui.presentation.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -43,6 +19,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.rutubishi.common.data.graphql.models.AuthOutput
+import com.rutubishi.common.data.network.Resource
 
 @Composable
 fun AuthBanner(
@@ -85,10 +63,14 @@ fun AuthScreen(
     title: String = "",
     bannerImg: Painter,
     bannerDescription: String? = null,
+    screenState: Resource<AuthOutput?> = Resource.Success(null),
+    loader: @Composable () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
 
-
+    if(screenState is Resource.Loading) {
+        loader()
+    }
 
     if (tabletMode) {
 
@@ -180,7 +162,7 @@ fun PasswordTextField(
             .padding(top = 8.dp),
         value = password,
         onValueChange = onPasswordChange,
-        label = { Text(text = "Password") },
+        label = { Text(text = "PASSWORD") },
         leadingIcon = passwordLeadingIcon,
         trailingIcon = {
             IconButton(onClick = { showPassword = !showPassword }){
@@ -209,11 +191,13 @@ fun EmailTextField(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp),
-        label = { Text(text = "Full Name") },
+        label = { Text(text = "EMAIL") },
         leadingIcon = { Icon(
-            imageVector = Icons.Default.AccountCircle,
+            imageVector = Icons.Default.Email,
             contentDescription = null) },
-        visualTransformation = VisualTransformation.None
+        visualTransformation = VisualTransformation.None,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email),
     )
 }
 
@@ -234,7 +218,7 @@ fun NameTextField(
             .padding(top = 8.dp),
         value = name,
         onValueChange = onNameChange,
-        label = { Text(text = "Full Name") },
+        label = { Text(text = "NAME") },
         leadingIcon = nameLeadingIcon,
     )
 
@@ -257,7 +241,7 @@ fun PhoneTextField(
             .padding(top = 8.dp),
         value = phone,
         onValueChange = onPhoneChange,
-        label = { Text(text = "Phone Number") },
+        label = { Text(text = "PHONE") },
         leadingIcon = phoneLeadingIcon,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Phone),
