@@ -13,7 +13,6 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation(libs.bundles.dev)
 
     androidTestImplementation(libs.bundles.test)
     debugImplementation(libs.bundles.debug)

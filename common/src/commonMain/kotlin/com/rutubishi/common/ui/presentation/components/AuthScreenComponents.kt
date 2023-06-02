@@ -213,6 +213,7 @@ fun EmailTextField(
         leadingIcon = { Icon(
             imageVector = Icons.Default.AccountCircle,
             contentDescription = null) },
+        visualTransformation = VisualTransformation.None
     )
 }
 

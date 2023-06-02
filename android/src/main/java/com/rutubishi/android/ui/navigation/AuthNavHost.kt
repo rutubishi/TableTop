@@ -1,5 +1,6 @@
 package com.rutubishi.android.ui.navigation
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rutubishi.android.R
+import com.rutubishi.android.ui.presentation.components.AppLoader
 import com.rutubishi.common.ui.presentation.screens.auth.LoginScreen
 import com.rutubishi.common.ui.presentation.screens.auth.RegisterScreen
 
@@ -29,12 +31,14 @@ fun AuthNavHost(
     ){
 
        composable("login"){
-            LoginScreen(
-                tabletMode = tabletMode,
-                modifier = modifier,
-                bannerImg = painterResource(id = R.drawable.login),
-                onNavigateToRegister = { navController.navigate("register") },
-            )
+           Column {
+                LoginScreen(
+                     tabletMode = tabletMode,
+                     modifier = modifier,
+                     bannerImg = painterResource(id = R.drawable.login),
+                     onNavigateToRegister = { navController.navigate("register") },
+                )
+           }
         }
 
         composable("register"){

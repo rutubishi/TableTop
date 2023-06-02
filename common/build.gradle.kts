@@ -25,7 +25,7 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material3)
                 api(libs.apollo.runtime)
-                implementation(libs.koin.core)
+                api(libs.koin.core)
             }
         }
 
@@ -39,12 +39,12 @@ kotlin {
             dependencies {
                 api(libs.appcompat)
                 api(libs.core.ktx)
+                api(libs.bundles.dev)
             }
         }
         val androidAndroidTest by getting {
             dependencies {
                 implementation(libs.junit4)
-                implementation(compose.uiTestJUnit4)
             }
         }
         val desktopMain by getting {
@@ -53,11 +53,7 @@ kotlin {
             }
         }
 
-        val desktopTest by getting {
-            dependencies {
-                implementation(compose.uiTestJUnit4)
-            }
-        }
+        val desktopTest by getting
     }
 }
 
