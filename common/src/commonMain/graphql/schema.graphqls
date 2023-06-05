@@ -4,6 +4,16 @@
 The GraphQL schema
 """
 
+enum Status {
+  SUCCESS, ERROR
+}
+
+type CreateAccountResponse {
+  status: Status!
+  message: String
+  data: AuthOutput
+}
+
 type AuthOutput {
   token: String
 }
@@ -31,6 +41,7 @@ type Query {
 type Mutation {
   signIn(signIn: SignInInput): AuthOutput!
   signUp(signUp: SignUpInput): AuthOutput!
+  createUserAccount(userAccount: SignUpInput): CreateAccountResponse!
 }
 
 type Subscription {

@@ -1,8 +1,6 @@
 package com.rutubishi.common.data.repository
 
 import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.api.Mutation
-import com.apollographql.apollo3.api.Query
 import com.rutubishi.common.data.graphql.models.AuthOutput
 import com.rutubishi.common.data.network.LoginUserMutation
 import com.rutubishi.common.data.network.RegisterUserMutation
@@ -21,6 +19,7 @@ class AuthRepository(
             val data = response.data
             if (data != null) {
                 val authOutput = AuthOutput(token = data.signIn.token)
+
                 emit(Resource.Success(authOutput))
             } else emit(Resource.Error(response.errors?.first()?.message ?: "Unknown error"))
         }catch (e: Exception){

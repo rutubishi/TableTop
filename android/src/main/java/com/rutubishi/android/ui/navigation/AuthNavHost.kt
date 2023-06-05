@@ -1,21 +1,14 @@
 package com.rutubishi.android.ui.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
 import com.rutubishi.android.R
-import com.rutubishi.android.ui.presentation.components.HomeAppBar
-import com.rutubishi.android.ui.presentation.components.HomeBottomBar
-import com.rutubishi.android.ui.presentation.screens.HomeScreen
 import com.rutubishi.android.ui.presentation.viewmodels.AuthVM
 import com.rutubishi.common.ui.presentation.screens.auth.LoginScreen
 import com.rutubishi.common.ui.presentation.screens.auth.RegisterScreen

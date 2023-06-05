@@ -6,3 +6,13 @@ sealed class Resource <T> (val data: T? = null, val message: String? = null) {
     class Loading<T>(data: T? = null): Resource<T>(data)
     class Idle<T>(data: T? = null): Resource<T>(data)
 }
+
+data class AppResponse<T>(
+    val data: T? = null,
+    val message: String? = null,
+    val status: ResponseStatus = ResponseStatus.SUCCESS
+)
+
+enum class ResponseStatus {
+    SUCCESS, ERROR
+}

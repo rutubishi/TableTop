@@ -4,6 +4,8 @@ import at.favre.lib.crypto.bcrypt.BCrypt
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.rutubishi.common.data.graphql.models.AuthOutput
+import com.rutubishi.common.data.network.AppResponse
+import com.rutubishi.common.data.network.ResponseStatus
 import com.rutubishi.data.db.User
 import com.rutubishi.data.repository.AuthRepository
 import io.ktor.server.application.*
@@ -16,6 +18,31 @@ import java.util.*
 class AuthService(
     private val authRepository: AuthRepository
 ) {
+
+
+    fun registerAccount(
+        email: String,
+        password: String,
+        fullName: String,
+        phone: String
+    ): AppResponse<AuthOutput> {
+        val user = authRepository
+            .createUser(
+                email = email,
+                name = fullName,
+                phone = phone,
+                password = hashPass(password)
+            )
+        return if(user == null) AppResponse(
+            status = ResponseStatus.ERROR,
+            message = "User with this email / phone already exists"
+        )
+        else AppResponse(
+            data = AuthOutput(
+                token = encodeJWT(Pair(email, user.id.value))
+            )
+        )
+    }
 
     @Throws(Exception::class)
     fun createAccount(
