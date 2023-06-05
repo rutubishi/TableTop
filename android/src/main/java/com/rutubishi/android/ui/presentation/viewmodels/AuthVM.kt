@@ -15,7 +15,7 @@ class AuthVM(
 ) : ViewModel() {
 
     private val _authState: MutableState<Resource<AuthOutput?>> =
-        mutableStateOf(Resource.Success(null))
+        mutableStateOf(Resource.Idle(null))
     val authState: MutableState<Resource<AuthOutput?>> = _authState
 
     fun login(
@@ -48,6 +48,9 @@ class AuthVM(
             }
             is Resource.Error -> {
                 _authState.value = Resource.Error(state.message!!)
+            }
+            is Resource.Idle -> {
+                _authState.value = Resource.Idle()
             }
         }
     }
