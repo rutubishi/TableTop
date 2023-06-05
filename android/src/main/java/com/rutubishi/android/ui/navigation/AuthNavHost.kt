@@ -1,5 +1,6 @@
 package com.rutubishi.android.ui.navigation
 
+import android.util.Log
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -39,8 +40,8 @@ fun AuthNavHost(
                onNavigateToRegister = { navController.navigate("register") },
                loader = loader,
                onLogin = authVM::login,
-               screenState = authVM.authState.value,
-               )
+               screenState = authVM.authState.value)
+           Log.d("AuthNavHost", "LoginScreen: ${authVM.authState.value.data}: Message: ${authVM.authState.value.message}")
         }
 
         composable("register"){
@@ -51,8 +52,8 @@ fun AuthNavHost(
                 onNavigateToLogin = { navController.navigate("login") },
                 loader = loader,
                 onRegister = authVM::register,
-                screenState = authVM.authState.value,
-                )
+                screenState = authVM.authState.value)
+            Log.d("AuthNavHost", "RegisterScreen: ${authVM.authState.value.data}: Message: ${authVM.authState.value.message}")
         }
     }
 

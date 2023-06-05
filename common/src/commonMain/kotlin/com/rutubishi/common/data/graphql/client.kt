@@ -16,7 +16,7 @@ object GraphQLClient {
         }
         .build()
 
-    private const val SERVER_URL = "http://192.168.0.101:3000/graphql"
+    private const val SERVER_URL = "http://192.168.0.105:3000/graphql"
 
     val client = ApolloClient
         .Builder()

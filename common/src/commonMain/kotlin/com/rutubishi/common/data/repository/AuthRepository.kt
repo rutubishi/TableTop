@@ -24,7 +24,7 @@ class AuthRepository(
                 emit(Resource.Success(authOutput))
             } else emit(Resource.Error(response.errors?.first()?.message ?: "Unknown error"))
         }catch (e: Exception){
-            emit(Resource.Error(e.message ?: "Unknown error"))
+            emit(Resource.Error(e.localizedMessage ?: "Unknown error"))
         }
     }
 
@@ -36,14 +36,14 @@ class AuthRepository(
     ): Flow<Resource<AuthOutput>> = flow {
         emit(Resource.Loading())
         try {
-            val response = appClient.mutation(RegisterUserMutation(email, fullName, phone, password)).execute()
+            val response = appClient.mutation(RegisterUserMutation(email, password, fullName, phone)).execute()
             val data = response.data
             if (data != null) {
                 val authOutput = AuthOutput(token = data.signUp.token)
                 emit(Resource.Success(authOutput))
             } else emit(Resource.Error(response.errors?.first()?.message ?: "Unknown error"))
         }catch (e: Exception){
-            emit(Resource.Error(e.message ?: "Unknown error"))
+            emit(Resource.Error(e.localizedMessage ?: "Unknown error"))
         }
     }
 
