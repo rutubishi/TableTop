@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 abstract class AppComposeTest(
     useAndroid: Boolean = false,
-    private val content: @Composable () -> Unit = { }
+    private val content: @Composable () -> Unit
 ) {
 
     @get:Rule

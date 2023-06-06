@@ -29,6 +29,7 @@ class RegisterScreenTest :
     private val nameField = hasText("NAME") and hasSetTextAction()
     private val phoneField = hasText("PHONE") and hasSetTextAction()
     private val registerButton =  isNotEnabled() and hasText("Register") and hasClickAction()
+    private val enabledButton = isEnabled() and hasText("Register") and hasClickAction()
     private val alreadyHaveAccountText = hasText("Already have an account?", substring = true) and hasClickAction()
 
     @Test
@@ -76,7 +77,6 @@ class RegisterScreenTest :
 
 
     private fun btnAssertion(enabled: Boolean = false){
-        val enabledButton = isEnabled() and hasText("Register") and hasClickAction()
         if(!enabled)
             composeRule
                 .onNode(enabledButton)

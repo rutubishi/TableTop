@@ -1,6 +1,8 @@
 package android.screens
 
+import android.fixtures.AppComposeTest
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasClickAction
@@ -21,30 +23,26 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-class HomeScreenTest {
-
+@ExperimentalMaterial3Api
+class HomeScreenTest :
+    AppComposeTest(
+        content = {
+            HomeScreen(
+                paddingValues = PaddingValues(all = 16.dp)
+            )
+        }
+    ){
     // ui element matchers
     private val adButton = hasText("Order Now", substring = true) and hasClickAction()
     private val adHeadline = hasText("30% off", substring = true)
     private val quickSearchOption = hasText("Fast Food", substring = true) and hasClickAction()
     private val searchBarWithOption = hasText("Fast Food", substring = true) and hasSetTextAction()
 
-    // compose test rule
-    @get:Rule val composeRule = createComposeRule()
 
-    // set up test
-    @Before
-    fun setUp() {
-        composeRule.setContent {
-            TableTopTheme {
-                HomeScreen(
-                    paddingValues = PaddingValues(all = 16.dp)
-                )
-            }
-        }
+    @Test
+    override fun uiElementsExist() {
+
     }
-
 
     // tests
     @Test

@@ -18,7 +18,7 @@ import com.rutubishi.common.ui.util.TrendingCategory
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    tabletMode: Boolean = true,
+    tabletMode: Boolean = false,
     paddingValues: PaddingValues,
 ) {
 

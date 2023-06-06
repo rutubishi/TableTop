@@ -1,5 +1,6 @@
 package android.screens
 
+import android.fixtures.AppComposeTest
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,36 +18,26 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-class LoginScreenTest {
+@ExperimentalMaterial3Api
+class LoginScreenTest : AppComposeTest(
+    content = {
+        LoginScreen(
+            modifier = Modifier.padding(16.dp),
+            bannerImg = painterResource(id = R.drawable.login),
+        )
+    }
+) {
     // ui element matchers
     private val emailField = hasText("EMAIL") and hasSetTextAction()
     private val passwordField = hasText("PASSWORD") and hasSetTextAction()
     private val loginButton =  isNotEnabled() and hasText("Login") and hasClickAction()
+    private val enabledButton = isEnabled() and hasText("Login") and hasClickAction()
     private val noAccountText = hasText("Don't have an account?", substring = true) and hasClickAction()
 
-    // compose test rule
-    @get:Rule
-    val composeRule = createAndroidComposeRule<ComponentActivity>()
-
-
-    // set up test
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Before
-    fun setUp() {
-        composeRule.setContent {
-            TableTopTheme {
-                LoginScreen(
-                    modifier = Modifier.padding(16.dp),
-                    bannerImg = painterResource(id = R.drawable.login),
-                )
-            }
-        }
-    }
 
     // tests
     @Test
-    fun uiElementsExist(){
+    override fun uiElementsExist(){
         composeRule
             .onNode(emailField)
             .assertExists(errorMessageOnFail = "Missing email field")
@@ -63,7 +54,6 @@ class LoginScreenTest {
 
     @Test
     fun loginButtonVisibility(){
-        val enabledButton = isEnabled() and hasText("Login") and hasClickAction()
         composeRule
             .onNode(emailField)
             .performTextInput("hello world")
