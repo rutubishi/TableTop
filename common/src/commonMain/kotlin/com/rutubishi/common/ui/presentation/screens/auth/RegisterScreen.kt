@@ -74,7 +74,8 @@ fun RegisterScreen(
 
         AuthHelperText(
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
+            isSignUp = true,
         ) {
             onNavigateToLogin()
         }
