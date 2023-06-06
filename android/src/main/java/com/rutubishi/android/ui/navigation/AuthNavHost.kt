@@ -34,7 +34,9 @@ fun AuthNavHost(
             navController.navigate("main")
         }
 
-        mainGraph(navController = navController)
+        mainGraph(
+            navController = navController,
+            tabletMode)
 
         composable("login"){
            LoginScreen(
