@@ -1,7 +1,15 @@
 package com.rutubishi.common.data.graphql.models
 
+import com.rutubishi.common.data.network.ResponseStatus
+
 data class AuthOutput(
     val token: String?
+)
+
+data class AuthResponse(
+    val status: ResponseStatus = ResponseStatus.SUCCESS,
+    val message: String? = null,
+    val data: AuthOutput? = null
 )
 
 data class SignInInput(

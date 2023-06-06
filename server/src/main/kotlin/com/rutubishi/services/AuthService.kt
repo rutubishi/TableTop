@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.rutubishi.common.data.graphql.models.AuthOutput
+import com.rutubishi.common.data.graphql.models.AuthResponse
 import com.rutubishi.common.data.network.AppResponse
 import com.rutubishi.common.data.network.ResponseStatus
 import com.rutubishi.data.db.User
@@ -25,7 +26,7 @@ class AuthService(
         password: String,
         fullName: String,
         phone: String
-    ): AppResponse<AuthOutput> {
+    ): AuthResponse {
         val user = authRepository
             .createUser(
                 email = email,
@@ -33,11 +34,11 @@ class AuthService(
                 phone = phone,
                 password = hashPass(password)
             )
-        return if(user == null) AppResponse(
+        return if(user == null) AuthResponse(
             status = ResponseStatus.ERROR,
             message = "User with this email / phone already exists"
         )
-        else AppResponse(
+        else AuthResponse(
             data = AuthOutput(
                 token = encodeJWT(Pair(email, user.id.value))
             )
@@ -141,9 +142,6 @@ class AuthService(
 
         // .env vars
         val JWT_SECRET: String = System.getenv("JWT_SECRET")
-
-
-
 
     }
 

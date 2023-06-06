@@ -1,15 +1,9 @@
 package com.rutubishi.graphql.mutations
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
-import com.apurebase.kgraphql.schema.execution.GenericTypeResolver
-import com.rutubishi.common.data.graphql.models.AuthOutput
-import com.rutubishi.common.data.graphql.models.SignInInput
-import com.rutubishi.common.data.graphql.models.SignUpInput
-import com.rutubishi.common.data.graphql.models.TestOutput
-import com.rutubishi.common.data.network.AppResponse
+import com.rutubishi.common.data.graphql.models.*
+import com.rutubishi.common.data.network.ResponseStatus
 import com.rutubishi.services.AuthService
-import kotlin.reflect.KType
-import kotlin.reflect.typeOf
 
 class AuthMutation(
     private val authService: AuthService
@@ -40,13 +34,9 @@ class AuthMutation(
             name = "TestOutput"
             description = "Test output"
         }
-        builder.type(AppResponse::class) {
-            name = "AppResponse"
-            description = "Response for all requests"
-        }
-        builder.type(CheckX::class) {
-            name = "AppResponse"
-            description = "Response for all requests"
+        builder.type(ResponseStatus::class){
+            name = "ResponseStatus"
+            description = "Response status"
         }
     }
 
@@ -94,22 +84,5 @@ class AuthMutation(
                     TestOutput("Hello welcome to GraphQL")
                 }
             }
-
-    private fun configure(){
-        builder.configure {
-            genericTypeResolver = AuthOutputResolver()
-        }
-    }
-
-    data class CheckX(val x: String)
-
-    class AuthOutputResolver : GenericTypeResolver {
-        override fun resolveMonad(type: KType): KType {
-            return typeOf<AppResponse<AuthOutput>>()
-        }
-        override fun unbox(obj: Any): Any? {
-            TODO("Not yet implemented")
-        }
-    }
 
 }
