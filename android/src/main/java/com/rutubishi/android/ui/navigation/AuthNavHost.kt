@@ -21,7 +21,7 @@ fun AuthNavHost(
     authVM: AuthVM,
     loader: @Composable () -> Unit = {},
     navController: NavHostController = rememberNavController(),
-    startDestination: String = "login"
+    startDestination: String = "main"
 ) {
 
     NavHost(
