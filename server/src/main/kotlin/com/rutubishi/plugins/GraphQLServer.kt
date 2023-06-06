@@ -18,7 +18,6 @@ fun Application.configureGraphQL() {
             mutations().forEach {
                 it.register(this)
             }
-
             /**
              * Queries - Read operations
              * */

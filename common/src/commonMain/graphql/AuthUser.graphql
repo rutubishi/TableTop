@@ -1,0 +1,41 @@
+# noinspection GraphQLUnresolvedReference
+mutation LoginUser($email: String!, $password: String!){
+  signIn(signIn: {
+    email: $email,
+    password: $password
+  }){
+    token
+  }
+}
+
+mutation RegisterUser($email: String!, $fullName: String!, $phone: String!, $password: String!) {
+  signUp(signUp: {
+    email: $email,
+    password: $password,
+    fullName: $fullName,
+    phone: $phone
+  }) {
+    token
+  }
+}
+
+mutation CreateUserAccount($email: String!, $fullName: String!, $phone: String!, $password: String!) {
+  createUserAccount(userAccount: {
+    email: $email,
+    password: $password,
+    fullName: $fullName,
+    phone: $phone
+  }) {
+    data {
+      token
+    }
+    message
+    status
+  }
+}
+
+query TestQuery {
+  test {
+    message
+  }
+}

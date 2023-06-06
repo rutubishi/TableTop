@@ -4,17 +4,19 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
+    id("com.apollographql.apollo3")
 }
 
 group = "com.rutubishi"
 version = "1.0-SNAPSHOT"
 
 kotlin {
-    android()
+    android {
+        jvmToolchain(11)
+    }
     jvm("desktop") {
         jvmToolchain(11)
     }
-
     @OptIn(ExperimentalComposeLibrary::class)
     sourceSets {
 
@@ -23,7 +25,8 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material3)
-                implementation(libs.koin.core)
+                api(libs.apollo.runtime)
+                api(libs.koin.core)
             }
         }
 
@@ -37,12 +40,12 @@ kotlin {
             dependencies {
                 api(libs.appcompat)
                 api(libs.core.ktx)
+                api(libs.bundles.dev)
             }
         }
         val androidAndroidTest by getting {
             dependencies {
                 implementation(libs.junit4)
-                implementation(compose.uiTestJUnit4)
             }
         }
         val desktopMain by getting {
@@ -51,11 +54,7 @@ kotlin {
             }
         }
 
-        val desktopTest by getting {
-            dependencies {
-                implementation(compose.uiTestJUnit4)
-            }
-        }
+        val desktopTest by getting
     }
 }
 
@@ -67,7 +66,14 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+apollo {
+    service("service"){
+        schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
+        packageName.set("com.rutubishi.common.data.network")
     }
 }

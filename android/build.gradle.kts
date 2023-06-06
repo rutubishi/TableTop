@@ -13,7 +13,6 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation(libs.bundles.dev)
 
     androidTestImplementation(libs.bundles.test)
     debugImplementation(libs.bundles.debug)
@@ -30,8 +29,8 @@ android {
         testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     buildTypes {
         getByName("release") {

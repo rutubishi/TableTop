@@ -1,6 +1,9 @@
 [versions]
 # main
-activity-compose = "1.5.0"
+activity-compose = "1.7.2"
+lottie-compose = "6.0.0"
+windowClassSizesCompose = "1.1.0"
+navigation-compose = "2.5.3"
 constraintlayout-compose = "1.0.1"
 appcompat = "1.5.1"
 core-ktx = "1.9.0"
@@ -8,7 +11,8 @@ ui-tooling-preview = "1.4.2"
 coil-compose= "2.4.0"
 kamel-image = "0.4.0"
 koin = "3.4.0"
-
+apollo-client = "3.8.2"
+coroutines-ktx = "1.7.1"
 # test
 test-compose = "1.4.3"
 faker = "1.0.2"
@@ -51,6 +55,9 @@ bcrypt-favre="0.10.2"
 [libraries]
 # dev
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+windowClassSizesCompose = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "windowClassSizesCompose" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
@@ -59,8 +66,12 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose
 kamel-image = { module = "com.alialbaali.kamel:kamel-image", version.ref = "kamel-image" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-androidx-navigation = { module = "io.insert-koin:koin-androidx-navigation", version.ref = "koin" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+apollo-runtime = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo-client" }
+coroutines-ktx = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines-ktx" }
 
 # test
 test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "test-compose" }
@@ -99,8 +110,10 @@ bcrypt = { module = "com.mindrot:jbcrypt", version.ref = "bcrypt" }
 bcrypt-favre = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt-favre" }
 
 [bundles]
-dev = [ "activity-compose", "ui-tooling-preview" ]
-test = [ "test-compose", "faker" ]
+dev = [ "activity-compose", "ui-tooling-preview", "koin-android",
+    "koin-androidx-navigation", "koin-androidx-compose", "navigation-compose",
+    "windowClassSizesCompose", "lottie-compose" ]
+test = [ "test-compose" ]
 debug = [ "ui-test-manifest", "ui-tooling" ]
 server-main = [ "kgraphql", "kgraphql-ktor", "ktor-server-netty", "ktor-server-core", "logback",
     "ktor-server-content-negotiation", "ktor-server-auth", "ktor-server-auth-jwt", "ktor-server-serialization", "postgres", "h2",
@@ -112,4 +125,5 @@ server-test = [ "ktor-server-test", "kotlin-test-junit", "koin-test" ]
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+apollo-client-plugin = { id = "com.apollographql.apollo3", version.ref = "apollo-client" }
 
